@@ -4,6 +4,19 @@ A Vagrant project for setting up Python Hahow development environment
 
 ## General Vagrant and VirtualBox Setup Information ###
 
+### VirtualBox installation for Ubuntu Linux User ###
+
+```bash
+# Remove existing virtualbox, if any
+$ sudo apt remove virtualbox virtualbox-4.3
+
+# Replace [trusty] with the Ubuntu version you're running; for example, for 16.04, it should be `xenial`
+$ sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian trusty contrib" >> /etc/apt/sources.list.d/virtualbox.list'
+$ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+$ sudo apt update
+$ sudo apt-get install virtualbox-5.2
+```
+
 ### Setting up `vagrant` autocompletion ###
 
 On my machine, here is what I did:
