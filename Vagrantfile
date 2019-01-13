@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # It is disabled because by default the the guest VM generate certain
   # OS log files which I do not want to sync back to host.
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -48,6 +48,9 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
     # vb.gui = true
+
+    # disable generating ubuntu-bionic-18.04-cloudimg-console.log file in the shared folder
+    vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
 
     # Customize the amount of memory on the VM:
     vb.memory = "2048"
