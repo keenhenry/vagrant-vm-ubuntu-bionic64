@@ -1,30 +1,36 @@
 ---
 - hosts: localhost
   tasks:
-    - debug:
-        msg: "Debugging ansible run ..."
+    - name: Add Sublime Text's GPG key
+      become: yes
+      apt_key:
+        url: https://download.sublimetext.com/sublimehq-pub.gpg
+        state: present
+    - name: Ensure Sublime Text's PPA repository present
+      become: yes
+      apt_repository:
+        repo: deb https://download.sublimetext.com/ apt/stable/
+        filename: "sublime-text"
+        state: present
     - name: Run "apt update" as a separate step
       become: yes
       apt:
         update_cache: yes
-    - name: Install essential libraries for development tools
+    - name: Ensure essential libraries for development are present
       become: yes
       apt:
-        name: "{{ item }}"
+        name: ['build-essential', 'libssl-dev', 'libffi-dev', 'python-dev']
         state: present
-      with_items:
-        - build-essential
-        - libssl-dev
-        - libffi-dev
-        - python-dev
-    - name: Ensure tmux, kdiff3 are present
+    - name: Ensure useful utilities are present
       become: yes
       apt:
-        name: "{{ item }}"
+        name: ['tmux', 'kdiff3', 'sublime-text']
         state: present
-      with_items:
-        - tmux
-        - kdiff3
+    - name: Ensure SQLite3 utilities are present
+      become: yes
+      apt:
+        name: ['sqlite3', 'sqlitebrowser']
+        state: present
     - name: Install Git Configurations
       template:
         src: templates/gitconfig.j2
