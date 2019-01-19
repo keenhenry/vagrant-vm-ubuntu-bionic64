@@ -47,8 +47,8 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
 
   config.vm.provider "virtualbox" do |vb|
-    # Display the VirtualBox GUI when booting the machine
-    # vb.gui = true
+    # Set virtual machine name
+    vb.name = "hahow-ubuntu-bionic"
 
     # disable generating ubuntu-bionic-18.04-cloudimg-console.log file in the shared folder
     vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
