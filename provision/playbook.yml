@@ -1,0 +1,37 @@
+---
+- hosts: localhost
+  tasks:
+    - debug:
+        msg: "Debugging ansible run ..."
+    - name: Run "apt update" as a separate step
+      become: yes
+      apt:
+        update_cache: yes
+    - name: Install essential libraries for development tools
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - build-essential
+        - libssl-dev
+        - libffi-dev
+        - python-dev
+    - name: Ensure tmux, kdiff3 are present
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - tmux
+        - kdiff3
+    - name: Install Git Configurations
+      template:
+        src: templates/gitconfig.j2
+        dest: /home/vagrant/.gitconfig
+        owner: vagrant
+        force: no
+    - name: Ensure directory repos present
+      file:
+        path: '/home/vagrant/repos/python-hahow'
+        state: directory
