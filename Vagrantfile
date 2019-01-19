@@ -68,11 +68,17 @@ Vagrant.configure(2) do |config|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
 
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
-  #   sudo apt-get install -y apache2
-  # SHELL
+  # Enable provisioning with ansible running on guest VM (`ansible_local`). The
+  # reason for using `ansible_local` is because some of the users of this vagrant
+  # project are Windows users, and they might not be able to install `ansible` on
+  # their host machine.
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.provisioning_path = "/vagrant"
+    ansible.inventory_path = "provision/inventory"
+    ansible.playbook = "provision/playbook.yml"
+    ansible.install = true
+    ansible.install_mode = "default"
+    ansible.limit = "localhost"
+    ansible.verbose = true
+  end
 end
