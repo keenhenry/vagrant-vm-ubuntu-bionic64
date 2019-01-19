@@ -41,7 +41,7 @@ Vagrant.configure(2) do |config|
   # It is disabled because by default the the guest VM generate certain
   # OS log files which I do not want to sync back to host.
   config.vm.synced_folder ".", "/vagrant", type: "rsync",
-      rsync__exclude: ".git/"
+      rsync__exclude: [".git/", "*swp"]
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
