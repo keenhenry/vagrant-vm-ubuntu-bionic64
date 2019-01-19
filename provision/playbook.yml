@@ -47,12 +47,16 @@
         venv_name: 'hahow'
         virtualenvwrapper_script: '/usr/share/virtualenvwrapper/virtualenvwrapper.sh'
         virtualenvwrapper_hook_dir: "{{ ansible_env.HOME }}/.virtualenvs"
-    - name: Install Git Configurations
+    - name: Install Git configuration
       template:
         src: templates/gitconfig.j2
         dest: /home/vagrant/.gitconfig
         owner: vagrant
         force: no
+    - name: Install Vim configuration
+      template:
+        src: templates/vimrc
+        dest: /home/vagrant/.vimrc
     - name: Ensure directory repos present
       file:
         path: '/home/vagrant/repos/python-hahow'
