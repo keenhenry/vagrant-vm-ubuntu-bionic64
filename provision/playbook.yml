@@ -19,7 +19,7 @@
     - name: Ensure essential libraries for development are present
       become: yes
       apt:
-        name: ['build-essential', 'libssl-dev', 'libffi-dev', 'python-dev']
+        name: ['build-essential', 'libssl-dev', 'libffi-dev', 'python-dev', 'libgtk2.0-0']
         state: present
     - name: Ensure useful utilities are present
       become: yes
