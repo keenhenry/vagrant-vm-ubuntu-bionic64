@@ -19,7 +19,7 @@
     - name: Ensure essential libraries for development are present
       become: yes
       apt:
-        name: ['build-essential', 'libssl-dev', 'libffi-dev', 'python-dev', 'libgtk2.0-0']
+        name: ['build-essential', 'libssl-dev', 'libffi-dev', 'python-dev', 'python3-dev', 'libgtk2.0-0']
         state: present
     - name: Ensure useful utilities are present
       become: yes
@@ -31,6 +31,22 @@
       apt:
         name: ['sqlite3', 'sqlitebrowser']
         state: present
+    - name: Ensure Python 3 dependencies present
+      become: yes
+      apt:
+        name: ['python3', 'python3-venv', 'virtualenvwrapper']
+        state: present
+    - name: Ensure Custom Hahow Python virtual environment present
+      shell: "source {{ virtualenvwrapper_script }} && mkvirtualenv -r {{ requirement_file }} -p /usr/bin/python3.6 {{ venv_name }}"
+      args:
+        chdir: "{{ ansible_env.HOME }}"
+        executable: "{{ ansible_env.SHELL }}"
+        creates: "{{ virtualenvwrapper_hook_dir }}/{{ venv_name }}"
+      vars:
+        requirement_file: '/vagrant/provision/templates/requirements.txt'
+        venv_name: 'hahow'
+        virtualenvwrapper_script: '/usr/share/virtualenvwrapper/virtualenvwrapper.sh'
+        virtualenvwrapper_hook_dir: "{{ ansible_env.HOME }}/.virtualenvs"
     - name: Install Git Configurations
       template:
         src: templates/gitconfig.j2
