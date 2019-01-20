@@ -80,6 +80,5 @@ Vagrant.configure(2) do |config|
     ansible.install = true
     ansible.install_mode = "default"
     ansible.limit = "localhost"
-    ansible.verbose = true
   end
 end
