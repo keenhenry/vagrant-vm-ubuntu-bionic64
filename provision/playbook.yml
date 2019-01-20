@@ -57,6 +57,10 @@
       template:
         src: templates/vimrc
         dest: /home/vagrant/.vimrc
+    - name: Install Tmux configuration
+      template:
+        src: templates/tmux.conf
+        dest: /home/vagrant/.tmux.conf
     - name: Ensure directory repos present
       file:
         path: '/home/vagrant/repos/python-hahow'
