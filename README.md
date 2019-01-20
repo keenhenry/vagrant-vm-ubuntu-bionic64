@@ -65,5 +65,13 @@ Linux ubuntu-bionic 4.15.0-43-generic #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018
 
 How to stop generating `ubuntu-bionic-18.04-cloudimg-console.log` file in the shared folder? see [this][2].
 
+### How to Use This Vagrant Project ###
+
+```bash
+$ # TODO: git clone <this project's URL>
+$ vagrant up
+```
+
+
 [1]: https://debian-administration.org/article/316/An_introduction_to_bash_completion_part_1
 [2]: https://betacloud.io/get-rid-of-ubuntu-xenial-16-04-cloudimg-console-log/
