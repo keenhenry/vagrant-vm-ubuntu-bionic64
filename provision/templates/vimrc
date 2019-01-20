@@ -39,58 +39,9 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" My bundles
-
-" file system navigation
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-
-" comment out codes easily
-Plugin 'tomtom/tcomment_vim'
-
-" go to specific line when open file with vim on command-line
-Plugin 'bogado/file-line'
-
-" autocomplete some code snippets
-Plugin 'SirVer/ultisnips' " for snippet engine
-Plugin 'honza/vim-snippets' " snippets used by snippet engine
-
-" autocomplete quotes and parentheses
-Plugin 'tpope/vim-surround'
-
-" autoindent for Python project development
-Plugin 'vim-scripts/indentpython.vim'
-
-" Asynchronous Linting Engine
-Plugin 'w0rp/ale'
-
-" Sort imports alphabetically and separate into sections
-Plugin 'fisadev/vim-isort'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
-
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+filetype plugin indent on " required
 
 """""""""""""""""""""""""""
 " compatibility with tmux "
@@ -173,8 +124,6 @@ set expandtab		" To insert space characters whenever the tab key is pressed
 set tabstop=4		" The number of spaces will be inserted when you hit tab key
 set shiftwidth=4	" The number of spaces inserted for indentation
 set smarttab
-
-" set ai			    " Turn on autoindenting
 set wrap            " Wrap lines
 set smartindent     " better indentation
 
@@ -298,59 +247,3 @@ nnoremap <leader>p :cNext<cr>
 """""""""""""""""""""""""
 nnoremap <C-l> :tabn<cr>
 nnoremap <C-h> :tabp<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Cope
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Python section
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Javascript section
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins related settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""" Settings for UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-"""""""" Settings for NERDTree
-let NERDTreeShowBookmarks = 1          " Show bookmarks when NERDTree startup
-
-" NERTDTree toggle shortcut. Requires NERDTree plugin
-map <silent> <F2> :NERDTreeToggle<CR>
-
-" Faster shortcut commenting. Requires T-Comment plugin
-map <leader>c <c-_><c-_>
-
-" Taglist toggle shortcut. Requires Taglist plugin
-map <silent> <F4> :TlistToggle<CR>
-
-
-"""""""" Settings for w0rp/ale
-let g:ale_python_pycodestyle_executable = $HOME . '/env/requestmachine/bin/pycodestyle'
-let g:ale_python_pycodestyle_options = '--max-line-length=100'
-let g:ale_python_mypy_executable = $HOME . '/env/requestmachine/bin/mypy'
-let g:ale_python_mypy_options = '--show-column-numbers --no-strict-optional --python-version=3.6'
-let g:ale_python_isort_executable = $HOME . '/env/requestmachine/bin/isort'
-let g:ale_python_isort_options = '-w 100'
-let g:ale_python_pylint_executable = $HOME . '/env/requestmachine/bin/pylint'
-let g:ale_python_pylint_options = '--disable=all --enable=W0611,W0612,W0613,W0614'
-let g:ale_linters = { 'python': ['pycodestyle', 'mypy', 'pylint'] }
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_fixers = {
-\   '*': [
-\           'remove_trailing_lines',
-\           'trim_whitespace',
-\        ],
-\   'python': ['isort'],
-\}
-let g:ale_fix_on_save = 1
