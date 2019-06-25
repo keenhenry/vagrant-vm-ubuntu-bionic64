@@ -4,7 +4,7 @@ A Vagrant project for setting up Python Hahow development environment
 
 ## General Vagrant and VirtualBox Setup Information ###
 
-### VirtualBox installation for Ubuntu Linux User ###
+### VirtualBox (5.2) installation for Ubuntu Linux User ###
 
 ```bash
 # Remove existing virtualbox, if any
@@ -15,6 +15,13 @@ $ sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian trusty 
 $ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 $ sudo apt update
 $ sudo apt-get install virtualbox-5.2
+```
+
+### Vagrant (2.2.3) installation for Ubuntu Linux User ###
+
+```bash
+$ wget https://releases.hashicorp.com/vagrant/2.2.3/vagrant_2.2.3_x86_64.deb
+$ sudo apt install ./vagrant_2.2.3_x86_64.deb
 ```
 
 ### Setting up `vagrant` autocompletion ###
@@ -69,8 +76,10 @@ Linux ubuntu-bionic 4.15.0-43-generic #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018
 ### How to Use This Vagrant Project ###
 
 ```bash
-$ # TODO: git clone <this project's URL>
+$ git clone https://github.com/keenhenry/vagrant-vm-ubuntu-bionic64.git
+$ cd vagrant-vm-ubuntu-bionic64
 $ vagrant up
+$ vagrant ssh  # login into the virtual machine
 ```
 
 
