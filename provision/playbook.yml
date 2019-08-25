@@ -37,7 +37,7 @@
         name: ['python3', 'python3-venv', 'virtualenvwrapper']
         state: present
     - name: Ensure Custom Hahow Python virtual environment present
-      shell: "source {{ virtualenvwrapper_script }} && mkvirtualenv -r {{ requirement_file }} -p /usr/bin/python3.6 {{ venv_name }}"
+      shell: "source {{ virtualenvwrapper_script }} && mkvirtualenv -r {{ requirement_file }} -p /usr/bin/python3 {{ venv_name }}"
       args:
         chdir: "{{ ansible_env.HOME }}"
         executable: "{{ ansible_env.SHELL }}"
